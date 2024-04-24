@@ -14,6 +14,12 @@ class ArtistManagementPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back();
+          },
+        ),
         title: const Text(
           "Manage Artists",
           style: TextStyle(fontSize: 30),

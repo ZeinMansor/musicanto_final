@@ -14,16 +14,16 @@ class CustomBottomNavBar extends StatelessWidget {
       unselectedItemColor: Colors.white,
       selectedItemColor: Colors.white,
       showSelectedLabels: true,
-      showUnselectedLabels: false,
+      showUnselectedLabels: true,
       items: [
         BottomNavigationBarItem(
             icon: IconButton(
-                onPressed: () => Get.toNamed("/login"),
+                onPressed: () => Get.offNamed("/login"),
                 icon: const Icon(Icons.favorite_outline)),
-            label: "Favorits"),
+            label: "Orders"),
         BottomNavigationBarItem(
             icon: IconButton(
-                onPressed: () => () => Get.toNamed("/home"),
+                onPressed: () => () => Get.offNamed("/home"),
                 icon: const Icon(Icons.home)),
             label: "Home"),
         BottomNavigationBarItem(
@@ -31,19 +31,13 @@ class CustomBottomNavBar extends StatelessWidget {
               onPressed: () => Get.toNamed("/songs_management"),
               icon: const Icon(Icons.play_circle_outlined),
             ),
-            label: "Play"),
-        BottomNavigationBarItem(
-            icon: IconButton(
-              onPressed: () => {},
-              icon: const Icon(Icons.propane_outlined),
-            ),
-            label: "Artists"),
+            label: "Songs"),
         BottomNavigationBarItem(
             icon: IconButton(
               onPressed: () => Get.toNamed("/artists_management"),
               icon: const Icon(Icons.person_2_outlined),
             ),
-            label: "Artists Management")
+            label: "Artists")
       ],
     );
   }

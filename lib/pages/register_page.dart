@@ -47,14 +47,25 @@ class RegisterPage extends StatelessWidget {
                         labelText: 'First Name',
                         border: OutlineInputBorder(),
                       ),
+                      style: const TextStyle(color: Colors.black),
                     ),
                     const SizedBox(height: 10.0),
                     TextField(
-                      controller: controller.emailController,
+                      controller: controller.lastNameController,
                       decoration: const InputDecoration(
-                        labelText: 'Email',
+                        labelText: 'Last Name',
                         border: OutlineInputBorder(),
                       ),
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                    const SizedBox(height: 10.0), // Add space between fields
+                    TextField(
+                      controller: controller.usernameController,
+                      decoration: const InputDecoration(
+                        labelText: 'Username',
+                        border: OutlineInputBorder(),
+                      ),
+                      style: const TextStyle(color: Colors.black),
                     ),
                     const SizedBox(height: 10.0), // Add space between fields
                     TextField(
@@ -64,15 +75,25 @@ class RegisterPage extends StatelessWidget {
                         labelText: 'Password',
                         border: OutlineInputBorder(),
                       ),
+                      style: const TextStyle(color: Colors.black),
                     ),
                     const SizedBox(height: 10.0), // Add space between fields
                     TextField(
-                      controller: controller.passwordController,
-                      obscureText: true,
+                      controller: controller.emailController,
                       decoration: const InputDecoration(
-                        labelText: 'Confirm Password',
+                        labelText: 'Email',
                         border: OutlineInputBorder(),
                       ),
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                    const SizedBox(height: 10.0), // Add space between fields
+                    TextField(
+                      controller: controller.addressController,
+                      decoration: const InputDecoration(
+                        labelText: 'Address',
+                        border: OutlineInputBorder(),
+                      ),
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ],
                 ),

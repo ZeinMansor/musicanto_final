@@ -6,6 +6,7 @@ class AuthGuardMiddleware extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
     String? token = prefs?.getString("token");
+    print(token);
     if (token != null) {
       return const RouteSettings(name: "/home");
     }

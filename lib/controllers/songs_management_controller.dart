@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:musicanto/models/artist.dart';
 import 'package:musicanto/util/api.dart';
@@ -38,6 +39,18 @@ class SongsManagementController extends GetxController {
   addSong() async {
     isLoading.value = true;
     if (formKey.currentState!.validate()) {
+      print("Id for selected artist $idSelectedArtist");
+
+      if (idSelectedArtist == null ||
+          songTitleController.text == null ||
+          songTypeController.text == null ||
+          songPriceController.text == null) {
+        Get.snackbar("Song", "Error, some input values are null",
+            backgroundColor: Colors.deepPurple,
+            colorText: Colors.white,
+            snackPosition: SnackPosition.BOTTOM);
+        return;
+      }
       var res = await ApiDataHolder.addNewSong(
           idSelectedArtist,
           songTitleController.text,
@@ -46,6 +59,16 @@ class SongsManagementController extends GetxController {
     }
     update();
     isLoading.value = false;
+  }
+
+  deleteSong(int id) async {
+    await ApiDataHolder.deleteSong(id);
+    update();
+    Get.snackbar("Songs", "Deleted Successfully",
+        backgroundColor: Colors.deepPurple,
+        colorText: Colors.white,
+        margin: const EdgeInsets.only(bottom: 30.0),
+        snackPosition: SnackPosition.BOTTOM);
   }
 
   Future<List<Song>> getSong() async {

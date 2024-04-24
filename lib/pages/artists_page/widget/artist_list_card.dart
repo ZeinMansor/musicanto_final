@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musicanto/controllers/artists_controller.dart';
 import 'package:musicanto/models/artist.dart';
 import 'package:musicanto/models/playlist.dart';
 
@@ -12,6 +13,7 @@ class ArtistListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ArtistsController controller = ArtistsController();
     return InkWell(
       onTap: () {
         print("Navigate to playlist page");
@@ -27,18 +29,6 @@ class ArtistListCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            // ClipRRect(
-            //   borderRadius: BorderRadius.circular(15.0),
-            //   child: Image(
-            //     image: AssetImage(artists.imageUrl),
-            //     height: 50,
-            //     width: 50,
-            //     fit: BoxFit.cover,
-            //   ),
-            // ),
-            // const SizedBox(
-            //   width: 20,
-            // ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +53,9 @@ class ArtistListCard extends StatelessWidget {
               ),
             ),
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  controller.deleteArtist(artists.id);
+                },
                 icon: const Icon(
                   Icons.delete,
                   color: Colors.white,

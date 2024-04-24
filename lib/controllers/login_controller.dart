@@ -22,7 +22,7 @@ class LoginController extends GetxController {
     // Add API Call here
     try {
       Map<String, String> body = {
-        "email": emailController.text,
+        "username": emailController.text,
         "password": passwordController.text
       };
 

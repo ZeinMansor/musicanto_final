@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../models/artist.dart';
@@ -60,5 +61,21 @@ class ArtistsController extends GetxController {
     isLoading.value = false;
   }
 
-  deleteArtist() {}
+  deleteArtist(int id) async {
+    var res = await ApiDataHolder.deleteArtist(id);
+    if (res == null) {
+      Get.snackbar("Artists", "Deleted Successfully",
+          backgroundColor: Colors.deepPurple,
+          colorText: Colors.white,
+          margin: const EdgeInsets.only(bottom: 30.0),
+          snackPosition: SnackPosition.BOTTOM);
+      update();
+    } else {
+      Get.snackbar("Artists", "Something went wrong",
+          backgroundColor: Colors.deepPurple,
+          colorText: Colors.white,
+          margin: const EdgeInsets.only(bottom: 30.0),
+          snackPosition: SnackPosition.BOTTOM);
+    }
+  }
 }

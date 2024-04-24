@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:musicanto/main.dart';
 import 'package:musicanto/models/artist.dart';
@@ -16,7 +17,7 @@ class ApiDataHolder {
   static String developmentBaseUrl = "http://127.0.0.1:3000/";
 
   static String getUrl() {
-    String env = "DEV";
+    String env = "PRODUCTION";
 
     if (env == "dev") {
       return developmentBaseUrl;
@@ -45,7 +46,6 @@ class ApiDataHolder {
         return Future(() => songs);
       }
     } catch (e) {
-      Get.snackbar("sad", "asd");
       print("Error getting songs list");
       print(e);
     }
@@ -55,8 +55,8 @@ class ApiDataHolder {
       int artistsId, String title, String type, String price) async {
     String token = prefs!.getString("token")!;
 
-    String url = "${getUrl()}/artist/${artistsId.toString()}/song";
-
+    String url = "${getUrl()}/artist/$artistsId/song";
+    print("Url for new song $url");
     var headers = {"Authorization": "Bearer $token"};
     var body = {"title": title, "type": type, "price": price};
     try {
@@ -64,6 +64,7 @@ class ApiDataHolder {
       final res = await http.post(Uri.parse(url), headers: headers, body: body);
       if (res.statusCode == 201) {
         var data = jsonDecode(res.body);
+        print(data);
         final songData = data['data'];
         Song songs = Song.fromJson(songData);
         print("successfully added songs");
@@ -81,6 +82,33 @@ class ApiDataHolder {
     String token = prefs.getString("token")!;
 
     String url = "${getUrl()}/song/$songId";
+
+    var headers = {"Authorization": "Bearer $token"};
+    try {
+      print("BEFOR get request");
+      final res = await http.delete(Uri.parse(url), headers: headers);
+      if (res.statusCode == 200) {
+        var data = jsonDecode(res.body);
+        final songData = data['data'];
+        final affectedRows = songData['affected'] as int;
+
+        if (affectedRows > 0) {
+          print("Deleted successfully");
+        }
+      }
+    } catch (e) {
+      print("Error adding new song songs list");
+      print(e);
+    }
+    return null;
+  }
+
+  static Future<Song?> deleteArtist(int artistId) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String token = prefs.getString("token")!;
+
+    String url = "${getUrl()}/artist/$artistId";
 
     var headers = {"Authorization": "Bearer $token"};
     try {
@@ -124,7 +152,10 @@ class ApiDataHolder {
     } catch (e) {
       print("Error getting artists list");
       print(e);
-      Get.snackbar("Api Error", "Error loading songs data");
+      Get.snackbar("Api Error", "Error loading songs data",
+          backgroundColor: Colors.deepPurple,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 

@@ -10,6 +10,8 @@ class SongsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SongsManagementController controller;
+
     return GetBuilder<SongsManagementController>(builder: (controller) {
       return FutureBuilder(
           future: controller.getSong(),
@@ -34,7 +36,9 @@ class SongsList extends StatelessWidget {
                         leading:
                             const CircleAvatar(child: Icon(Icons.music_note)),
                         trailing: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.deleteSong(snapshot.data![index].id);
+                            },
                             icon: const Icon(
                               Icons.delete,
                               color: Colors.white,
