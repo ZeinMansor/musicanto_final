@@ -27,9 +27,9 @@ class ArtistsController extends GetxController {
 
   @override
   void onClose() {
-    firstName.dispose();
-    lastName.dispose();
-    country.dispose();
+    // firstName.dispose();
+    // lastName.dispose();
+    // country.dispose();
     super.onClose();
   }
 

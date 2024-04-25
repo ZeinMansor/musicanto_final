@@ -18,7 +18,7 @@ class OrdersPage extends StatelessWidget {
       ),
       body: const SingleChildScrollView(
         child: Column(
-          children: [AddSongForm(), SongsList()],
+          children: [],
         ),
       ),
     );
